@@ -1,0 +1,333 @@
+{
+	"info": {
+		"_postman_id": "cf8e1aab-ae65-4a11-bc05-f5f9cdc322e1",
+		"name": "AWS-Image-Processing-Microservice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6467893"
+	},
+	"item": [
+		{
+			"name": "Local:  Successful request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"strictSSL": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/filteredimage?image_url=https://www.photos-public-domain.com/wp-content/uploads/2018/05/siamese-tabby-cat-600x600.jpg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"filteredimage"
+					],
+					"query": [
+						{
+							"key": "image_url",
+							"value": "https://www.photos-public-domain.com/wp-content/uploads/2018/05/siamese-tabby-cat-600x600.jpg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Local: Missing URL",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/filteredimage?image_url",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"filteredimage"
+					],
+					"query": [
+						{
+							"key": "image_url",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Local: Bad URL - image does not exist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/filteredimage?image_url=https://www.photos-public-domain.com/wp-content/uploads/2018/05/bad-url.jpg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"filteredimage"
+					],
+					"query": [
+						{
+							"key": "image_url",
+							"value": "https://www.photos-public-domain.com/wp-content/uploads/2018/05/bad-url.jpg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Local :  Bad URL - not an image",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/filteredimage?image_url=http://google.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"filteredimage"
+					],
+					"query": [
+						{
+							"key": "image_url",
+							"value": "http://google.com"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EB: successful request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://aws-image-processing-microservice-dev.us-east-1.elasticbeanstalk.com/filteredimage?image_url=https://www.photos-public-domain.com/wp-content/uploads/2018/05/siamese-tabby-cat-600x600.jpg",
+					"protocol": "http",
+					"host": [
+						"aws-image-processing-microservice-dev",
+						"us-east-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"filteredimage"
+					],
+					"query": [
+						{
+							"key": "image_url",
+							"value": "https://www.photos-public-domain.com/wp-content/uploads/2018/05/siamese-tabby-cat-600x600.jpg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EB: missing URL",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://aws-image-processing-microservice-dev.us-east-1.elasticbeanstalk.com/filteredimage?image_url",
+					"protocol": "http",
+					"host": [
+						"aws-image-processing-microservice-dev",
+						"us-east-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"filteredimage"
+					],
+					"query": [
+						{
+							"key": "image_url",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EB: Bad URL - image does not exist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://aws-image-processing-microservice-dev.us-east-1.elasticbeanstalk.com/filteredimage?image_url=https://www.photos-public-domain.com/wp-content/uploads/2018/05/bad-url.jpg",
+					"protocol": "http",
+					"host": [
+						"aws-image-processing-microservice-dev",
+						"us-east-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"filteredimage"
+					],
+					"query": [
+						{
+							"key": "image_url",
+							"value": "https://www.photos-public-domain.com/wp-content/uploads/2018/05/bad-url.jpg"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EB: Bad URL - not an image",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://aws-image-processing-microservice-dev.us-east-1.elasticbeanstalk.com/filteredimage?image_url=http://google.com",
+					"protocol": "http",
+					"host": [
+						"aws-image-processing-microservice-dev",
+						"us-east-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"filteredimage"
+					],
+					"query": [
+						{
+							"key": "image_url",
+							"value": "http://google.com"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
