@@ -49,9 +49,10 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util.js';
                   console.log('Filtered image path: ', filteredImagePath);
 
                   res.status(200).sendFile(filteredImagePath, function() {
-                    deleteLocalFiles([filteredImagePath]);
+                      deleteLocalFiles([filteredImagePath]);
                   } );
               } catch (error) {
+                  console.log("ERROR: ", error);
                   const message = "Bad image url. Image not found or not an image.";
                   console.log(message);
                   res.status(404).send(message);
